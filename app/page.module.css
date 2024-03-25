@@ -1,0 +1,93 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0rem;
+  min-height: auto;
+  /* background-color: black; */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+}
+.cardImage {
+  float: right;
+  /* Add any other styles for the image here */
+}
+
+.card {
+  width: 70%;
+  min-width: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  height: auto;
+  background-color: #eeeeee;
+  /* background: url(../public/images/pexels-lukas-349610.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center; */
+
+}
+
+.searchBar {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 3px;
+  border: #ff9d00 2px solid;
+  color: #000000;
+  cursor: pointer;
+}
+
+.cardContent {
+  flex: 1;
+  float: left;
+  width: 100%;
+  /* Add any other styles for the content here */
+}
+
+
+
+
+@keyframes moveBackground {
+  from {
+    background-position: center;
+  }
+  to {
+    background-position: center top;
+  }
+}
+
+.background {
+  background: url(../public/images/pexels-ella-olsson-1640773.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  animation: moveBackground 1s linear;
+}
+
+.cardContent ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cardContent ul li {
+  /* display: inline-block; */
+  margin-right: 50px;
+  padding: 10px;
+}
+
+.cardContent ul li a {
+  color: #ff6200;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+}
+
