@@ -2,11 +2,9 @@
 import LoginPage from './login/page'
 import styles from './page.module.css'
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import { DataTable } from 'primereact/datatable'
-import { Column } from 'primereact/column'
 import { Card } from 'primereact/card'
 import Link from 'next/link'
+import jwt from 'jsonwebtoken';
 
 import { Galleria } from 'primereact/galleria'
 import fs from 'fs'
@@ -17,7 +15,15 @@ export default function Home () {
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (token) {
-      setIsLoggedIn(true)
+      const decodedToken = jwt.decode(token);
+      const dateNow = new Date();
+      console.log(decodedToken)
+      if(decodedToken && decodedToken.exp > dateNow.getTime()/1000){
+        setIsLoggedIn(true)
+      } else {
+        console.log("Token has expired.");
+        setIsLoggedIn(false)
+      }
     }
   }, [])
 
@@ -28,7 +34,6 @@ export default function Home () {
     setUsername(username)
     setPassword(password)
     setIsLoggedIn(true)
-    
   }
 
   // const [images, setImages] = useState([])
@@ -64,13 +69,6 @@ export default function Home () {
                 </ul>
               </div>
               <div className={styles.cardImage}>
-                {/* Image on the right */}
-                {/* <Image
-                src='/images/pexels-dominika-roseclay-2090903.jpg'
-                alt='Picture of pizza smoked salmon'
-                width={100}
-                height={100}
-              /> */}
               </div>
             </Card>
           </main>

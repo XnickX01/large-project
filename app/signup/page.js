@@ -14,7 +14,7 @@ export default function SignUp() {
     event.preventDefault();
 
     // Call your API here
-    const response = await fetch('http://localhost:4000/users', {
+    const response = await fetch('http://localhost:4000/signup', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',

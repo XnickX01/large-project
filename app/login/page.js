@@ -23,7 +23,7 @@ function LoginPage({ onLogin }) {
 
         const handleLogin = () => {
             // Perform login logic here
-            fetch('http://localhost:4000/user', {
+            fetch('http://localhost:4000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,14 +34,16 @@ function LoginPage({ onLogin }) {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.message);
+                    console.log(data.message, data.token);
                     // Handle the response data here
-                    if (data.message !== 'User not found') {
-                        onLogin(username, password)
+                    if (data.message === 'Yay you\'re logged in!') {
+                        console.log('Logging in with username and password:', username, password);
+                        onLogin(username, password);
+                        console.log('Logging in with username and password:', username, password);
                         //set jwt token in local storage
                         localStorage.setItem('token', data.token);
-                        router.push('/');
                         console.log('Logging in with username and password:', username, password);
+                        router.push('/');
 
                     } else {
                         console.alert("User doesn't exist")
@@ -50,6 +52,7 @@ function LoginPage({ onLogin }) {
                 })
                 .catch(error => {
                     // Handle any errors here
+                    console.error('Error:', error);
                 });
         };
     

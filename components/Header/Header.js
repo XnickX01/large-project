@@ -6,7 +6,8 @@ import { faUtensils, faUser } from '@fortawesome/free-solid-svg-icons'
 import classes from './Header.module.css';
 import Link from 'next/link'
 
-export default function Header() {
+export default function Header({onLogout}) {
+    
 return (
     <header className={classes.header}>
         <h1 className={classes.headerLogo}>
@@ -20,7 +21,7 @@ return (
                 <li>Community</li>
             </Link>
             <li></li>
-            <li>
+            <li onClick={onLogout}>
                 <FontAwesomeIcon icon={faUser} size='1x'/>
             </li>
         </ul>
