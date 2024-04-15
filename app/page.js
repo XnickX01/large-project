@@ -1,81 +1,56 @@
 'use client'
-import LoginPage from './login/page'
 import styles from './page.module.css'
 import { useState, useEffect } from 'react'
 import { Card } from 'primereact/card'
 import Link from 'next/link'
-import jwt from 'jsonwebtoken';
+import Image from 'next/image'
 
-import { Galleria } from 'primereact/galleria'
-import fs from 'fs'
-const path = require('path');
 export default function Home () {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  //check if user is logged in through local storage
+  const [categories, setCategories] = useState([])
+
+
+
+  //get meals by category from mealdb api
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      const decodedToken = jwt.decode(token);
-      const dateNow = new Date();
-      console.log(decodedToken)
-      if(decodedToken && decodedToken.exp > dateNow.getTime()/1000){
-        setIsLoggedIn(true)
-      } else {
-        console.log("Token has expired.");
-        setIsLoggedIn(false)
-      }
-    }
+    fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.categories)
+        setCategories(data.categories)
+      })
   }, [])
+  
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleLogin = (username, password) => {
-    setUsername(username)
-    setPassword(password)
-    setIsLoggedIn(true)
-  }
-
-  // const [images, setImages] = useState([])
-
-  // useEffect(() => {
-  //   const imagesDir = path.join(process.cwd(), 'public', 'images')
-  //   const imageFileNames = fs.readdirSync(imagesDir)
-  //   const images = imageFileNames.map(fileName => ({
-  //     source: `/images/${fileName}`,
-  //     alt: fileName,
-  //     title: fileName
-  //   }))
-  //   setImages(images)
-  // }, [])
 
   return (
     <>
-      {isLoggedIn ? (
         <main className={[styles.main, styles.background].join(' ')}>
           <main className={styles.container}>
-            <Card title={`Welcome ${username}`} className={styles.card}>
+            <Card title={`Select Categories for your upcoming meal`} className={styles.card}>
               <div className={styles.cardContent}>
                 <ul>
                   <li>
-                    <Link href='/community'>Browse recipies and meals</Link>
+                    <Link href='/community'>Browse Recipies and Meals</Link>
                   </li>
                   <li>
-                    <Link href='/addrecipe'>Add your own recipies</Link>
-                  </li>
-                  <li>
-                    <Link href='/accountsettings'>Account</Link>
+                    <Link href='/favorite'>Favorites Meals</Link>
                   </li>
                 </ul>
-              </div>
-              <div className={styles.cardImage}>
+                <ul className={styles.categories}>
+                  {categories.slice(0, 12).map(category => (
+                    <Link href={`/category/${category.strCategory}`} key={category.idCategory}>
+                    <li key={category.idCategory} >
+                      {category.strCategory}
+                      <br />
+                      <Image src={category.strCategoryThumb} alt={category.strCategory} width={60} height={40} />
+                    </li>
+                    </Link>
+                  ))}
+                </ul> 
               </div>
             </Card>
           </main>
         </main>
-      ) : (
-        <LoginPage onLogin={handleLogin} />
-      )}
     </>
   )
 }

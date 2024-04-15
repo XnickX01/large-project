@@ -4,6 +4,8 @@
     background-color: #FF4500;
     padding: 20px;
     text-align: center;
+    position: relative;
+    bottom: 0;
 }
 
 .footer h3 {

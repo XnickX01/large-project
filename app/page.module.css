@@ -4,15 +4,16 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0rem;
-  min-height: auto;
+  /* min-height: auto; */
   /* background-color: black; */
+  height: 100vh;
 }
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
+  /* height: auto; */
   width: 100%;
 }
 .cardImage {
@@ -21,16 +22,17 @@
 }
 
 .card {
-  width: 70%;
+  width: 80%;
   min-width: 300px;
-  padding: 20px;
+  padding: 0px;
   border-radius: 5px;
-  height: auto;
+  /* height: auto; */
   background-color: #eeeeee;
   /* background: url(../public/images/pexels-lukas-349610.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; */
+  height: 80vh;
 
 }
 
@@ -46,13 +48,32 @@
 
 .cardContent {
   flex: 1;
-  float: left;
   width: 100%;
   /* Add any other styles for the content here */
+  display: inline-block;
 }
 
+.cardContent ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
+.cardContent ul li {
+  display: inline-block;
+  margin-right: 50px;
+  padding: 10px;
+  font-size: larger;
+  min-width: none;
+}
 
+.cardContent ul li:hover {
+  color: #ffffff;
+}
+
+.cardContent ul li a:hover{
+  text-decoration: underline;
+}
 
 @keyframes moveBackground {
   from {
@@ -91,3 +112,29 @@
   text-decoration: none;
 }
 
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.categories li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #ff9d00;
+  color: #ffffff;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.categories li:hover {
+  background-color: #ffc400;
+}

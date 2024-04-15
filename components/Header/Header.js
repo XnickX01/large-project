@@ -5,9 +5,14 @@ config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatic
 import { faUtensils, faUser } from '@fortawesome/free-solid-svg-icons'
 import classes from './Header.module.css';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-export default function Header({onLogout}) {
-    
+
+export default function Header({ username, password}) {
+    const router = useRouter();
+
+
 return (
     <header className={classes.header}>
         <h1 className={classes.headerLogo}>
@@ -21,7 +26,15 @@ return (
                 <li>Community</li>
             </Link>
             <li></li>
-            <li onClick={onLogout}>
+            <li onClick={()=>{
+                if (username && password) {
+                    console.log("profile")
+                    router.push(`/profile`);
+                } else {
+                    console.log("login", "username: ", username, "password: " ,password)
+                    router.push('/');
+                }
+            }}>
                 <FontAwesomeIcon icon={faUser} size='1x'/>
             </li>
         </ul>

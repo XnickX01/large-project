@@ -9,6 +9,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const router = useRouter();
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,10 +26,11 @@ export default function SignUp() {
     const data = await response.json();
     console.log(data);
     if (response.ok) {
-        alert('Sign up successful!');
+        setError(false);
         router.push('/login');
       } else {
         alert(`Sign up failed: ${data.error}`);
+        setError(true);
       }
 
 
