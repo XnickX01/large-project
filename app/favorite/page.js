@@ -70,15 +70,21 @@ export default function Favorite() {
         
 
         return (
+        <div className={styles.background}>
             <div className={styles.container}>
-                {favoriteMeals.map((meal, index) => (
-                        <div key={`${meal.idMeal} ${index}`} className={styles.card}>
+                {favoriteMeals.length > 0 && favoriteMeals.map((meal, index) => (
+                    <a href={`/meal/${meal.idMeal}`} key={`${meal.idMeal} ${index}`} className={styles.link}>
+                        <div  className={styles.card}>
                             <h2>{meal.strMeal}</h2>
-                            <p>{meal.strInstructions}</p>
                             <img src={meal.strMealThumb} alt={meal.strMeal} height={100} width={100}/>
                         </div>
+                    </a>
                 ))}
+
+                {favoriteMeals.length === 0 && <h2>No favorite meals yet</h2>}
+                
             </div>
+        </div>
         );
     
 }

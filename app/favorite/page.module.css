@@ -5,11 +5,37 @@
     gap: 1rem;
     width: 80%;
     margin: 0 auto;
-    border: 1px solid #ddd;
+    border: 1px solid #c5c5c5;
     border-radius: 5px;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-bottom: 400px;
+    min-height: 200px;
+    height: 100vh;
+    overflow: scroll;
+}
+
+.background {
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: 200px;    
+}
+
+.card{
+    width: 100%;
+    min-width: 70vh;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #bbdc9c;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.link{
+    text-decoration: none;
+    color: #333;
 }

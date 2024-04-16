@@ -78,3 +78,35 @@
       background-position: 0% 50%;
     }
   }
+
+  .confirm{
+    height: 60vh;
+    width: 60%;
+    margin: 0vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    
+
+  }
+
+  .confirm input{
+    width: 30%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .confirm button{
+    width: 30%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 3px;
+    background-color: #ff9d00;
+    color: #fff;
+    cursor: pointer;
+  }

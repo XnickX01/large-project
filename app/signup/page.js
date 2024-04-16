@@ -29,7 +29,7 @@ export default function SignUp({onShowLogin}) {
 
 
   const submitConfirm = async () => {
-    const response = await fetch('http://localhost:4000/confirmation-number', {
+    const response = await fetch('http://culinary-canvas-express.com:40/confirmation-number', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function SignUp({onShowLogin}) {
     event.preventDefault();
 
     // Call your API here
-    const response = await fetch('http://localhost:4000/signup', {
+    const response = await fetch('http://culinary-canvas-express.com:40/signup', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export default function SignUp({onShowLogin}) {
 
   return (
     <div className={[styles.main, styles.background].join(' ')}>
-     {!showConfirm ? <form className={styles.box} onSubmit={handleSubmit}>
+     {showConfirm ? <form className={styles.box} onSubmit={handleSubmit}>
         <h1>
           Sign Up
         </h1>
@@ -118,13 +118,13 @@ export default function SignUp({onShowLogin}) {
       </form>
       : 
   
-      <>
+      <div className={styles.confirm}>
       <h1>Thank you for signing up!</h1>
       <p>Please confirm Via Email</p>
 
       <input value={confirmNum} type='number' min={0} max={99} onChange={(e)=>setConfirmNum(e.target.value)} />
       <button onClick={submitConfirm}>Submit</button>
-      </>
+      </div>
       }
 
     </div>
