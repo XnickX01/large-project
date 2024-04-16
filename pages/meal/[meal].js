@@ -13,7 +13,8 @@ import { PrimeIcons } from 'primereact/api';
 import { Button } from 'primereact/button';
 import { ToggleButton } from 'primereact/togglebutton';
 import { JsonWebToken } from 'jsonwebtoken';
-        
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
+
 export default function MealPage() {
     
     const router = useRouter()
@@ -23,11 +24,12 @@ export default function MealPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-
-    const token = localStorage.getItem('token')
+    const token = getLocalStorage('token')
 
     //get user by token
-    fetch('http://localhost:4000/user', {
+    useEffect(() => {
+        if(token){
+    fetch('http://culinary-canvas-express.com:40/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -40,12 +42,14 @@ export default function MealPage() {
         setUsername(data.username)
         setPassword(data.password)
     })
+        }
+    }, [token])
 
 
     useEffect(() => {
         async function fetchFollowStatus(){
             try{
-        fetch('http://localhost:4000/is-favorite', {
+        fetch('http://culinary-canvas-express.com:40/is-favorite', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +87,7 @@ export default function MealPage() {
         setChecked(!checked)
         // if(checked === false){
         //     setChecked(true)
-        //     fetch('http://localhost:4000/favorite-recipe', {
+        //     fetch('http://culinary-canvas-express.com:40/favorite-recipe', {
         //         method: 'POST',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -97,7 +101,7 @@ export default function MealPage() {
         // } else {
         //     console.log('unchecked')
         //     setChecked(false)
-        //     fetch('http://localhost:4000/unfavorite', {
+        //     fetch('http://culinary-canvas-express.com:40/unfavorite', {
         //         method: 'DELETE',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -111,10 +115,9 @@ export default function MealPage() {
         // }
     }
 
-    useEffect(()=>{
-        console.log('checked', meals)
+    useEffect((e)=>{
         if(checked){
-            fetch('http://localhost:4000/favorite-recipe', {
+            fetch('http://culinary-canvas-express.com:40/favorite-recipe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,7 +130,7 @@ export default function MealPage() {
             })
         }else{
             console.log('unchecked')
-            fetch('http://localhost:4000/unfavorite', {
+            fetch('http://culinary-canvas-express.com:40/unfavorite', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,23 +1,27 @@
 "use client"
-import { useState } from 'react';
+import { use, useState } from 'react';
 import styles from './page.module.css';
-import { useRouter } from 'next/navigation'
-import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { ToggleButton } from 'primereact/togglebutton';
-        
+import { useEffect } from 'react';
+import Link from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 
 export default function Favorite() {
-    const router = useRouter();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const token = localStorage.getItem('token')
+    const [meals, setMeals] = useState([])
     const [favoriteMeals, setFavoriteMeals] = useState([])
+    
+    
+    const router = useRouter();
 
     //get user by token
-     fetch('http://localhost:4000/user', {
+    useEffect(() => {
+     fetch('http://culinary-canvas-express.com:40/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -30,47 +34,51 @@ export default function Favorite() {
         setUsername(data.username)
         setPassword(data.password)
     })
+    }, [token])
 
     //get favorite meals by user using post to /favorite and passing username
-    fetch('http://localhost:4000/favorite', {
-       method: 'POST',
-       headers: {
-           'Content-Type': 'application/json',
-    
-       },
-       body: JSON.stringify({ username }),
-    })
-    .then(response => response.json())
-    .then(data => {
-       console.log(data)
-         setFavoriteMeals(data)
-       
-    })
+    useEffect(() => {
+        fetch('http://culinary-canvas-express.com:40/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setMeals(data)
+
+                //after getting meal ids, get the meal from the mealdb api
+                const mealIds = data.map((meal) => meal.recipeId)
+                console.log(mealIds)
+                mealIds.forEach((mealId) => {
+                    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data.meals[0])
+                            setFavoriteMeals((prev) => [...prev, data.meals[0]])
+                        })
 
 
+            })})
+        }, [username])
 
 
+ 
+        
 
-    return (
-        <div>
-            <h1>Favorite Meals</h1>
-            <Card className={styles.card}>
-            <h1>{username}</h1>
-            <hr />
-            <ul>
-                {favoriteMeals.map((meal) => (
-                    <Card key={meal.id} className={styles.card}>
-                    <li >
-                        <h2>{meal.name}</h2>
-                        <p>{meal.description}</p>
-                    </li>
-                    </Card>
+        return (
+            <div className={styles.container}>
+                {favoriteMeals.map((meal, index) => (
+                        <div key={`${meal.idMeal} ${index}`} className={styles.card}>
+                            <h2>{meal.strMeal}</h2>
+                            <p>{meal.strInstructions}</p>
+                            <img src={meal.strMealThumb} alt={meal.strMeal} height={100} width={100}/>
+                        </div>
                 ))}
-            </ul>
-            <Button label='Back' onClick={() => router.push('/')} />
-            </Card>
-
-
-        </div>
-    );
+            </div>
+        );
+    
 }

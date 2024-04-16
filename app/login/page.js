@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link'
 import classes from './page.module.css';
 import { useRouter } from 'next/navigation'
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
 
 
 function LoginPage({ onLogin }) {
@@ -23,7 +24,7 @@ function LoginPage({ onLogin }) {
 
         const handleLogin = () => {
             // Perform login logic here
-            fetch('http://localhost:4000/login', {
+            fetch('http://culinary-canvas-express.com:40/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -42,6 +43,7 @@ function LoginPage({ onLogin }) {
                         console.log('Logging in with username and password:', username, password);
                         //set jwt token in local storage
                         localStorage.setItem('token', data.token);
+                        setLocalStorage('token', data.token);
                         console.log('Logging in with username and password:', username, password);
                         router.push('/');
 

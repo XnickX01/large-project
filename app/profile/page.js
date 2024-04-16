@@ -13,7 +13,7 @@ export default function Profile() {
     const token = localStorage.getItem('token')
 
     //get user by token
-     fetch('http://localhost:4000/user', {
+     fetch('http://culinary-canvas-express.com:40/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

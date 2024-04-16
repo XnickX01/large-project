@@ -11,6 +11,7 @@ import LoginPage from './login/page'
 const inter = Inter({ subsets: ['latin'] })
 import jwt from 'jsonwebtoken';
 import styles from './layout.module.css'
+import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
 // export const metadata = {
 //   title: 'Culinary Canvas',
 //   description: 'Website for Chefs to Collaborate and Share Recipes',
@@ -33,7 +34,7 @@ export default function RootLayout ({ children }) {
       if(decodedToken && decodedToken.exp > dateNow.getTime()/1000){
         setIsLoggedIn(true)
         //get user by token
-        fetch('http://localhost:4000/user', {
+        fetch('http://culinary-canvas-express.com:40/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

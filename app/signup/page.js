@@ -15,7 +15,7 @@ export default function SignUp() {
     event.preventDefault();
 
     // Call your API here
-    const response = await fetch('http://localhost:4000/signup', {
+    const response = await fetch('http://culinary-canvas-express.com:40/signup', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
