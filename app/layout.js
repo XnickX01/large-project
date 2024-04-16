@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 import jwt from 'jsonwebtoken';
 import styles from './layout.module.css'
 import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
+import SignUpPage from './signup/page'
 // export const metadata = {
 //   title: 'Culinary Canvas',
 //   description: 'Website for Chefs to Collaborate and Share Recipes',
@@ -24,6 +25,7 @@ export default function RootLayout ({ children }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const[isSignedUp, setIsSignedUp] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -62,6 +64,14 @@ export default function RootLayout ({ children }) {
     setIsLoggedIn(true)
   }
 
+  const onShowSignup = () => {
+    setIsSignedUp(true)
+  }
+
+  const onShowLogin = () => {
+    setIsSignedUp(false)
+  }
+
 
   return (
     <>
@@ -80,9 +90,17 @@ export default function RootLayout ({ children }) {
                   {isLoggedIn ? (
                     children
                   ) : (
-                    <LoginPage onLogin={handleLogin} />
+                    <>
+                    {isSignedUp ? (
+                      <SignUpPage onShowLogin={onShowLogin} />
+                    ) : (
+                      <LoginPage onShowSignup={onShowSignup} onLogin={handleLogin} />
+                    )
+                      
+                    }
+                    </>
                   )}
-                  </div>
+                </div>
               </div>
               <Footer className={styles.footer} />
           </PrimeReactProvider>

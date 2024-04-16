@@ -5,9 +5,10 @@ import Link from 'next/link'
 import classes from './page.module.css';
 import { useRouter } from 'next/navigation'
 import { getLocalStorage, setLocalStorage } from '@/utils/localStorage'
+import SignUp from '../signup/page';
 
 
-function LoginPage({ onLogin }) {
+function LoginPage({ onLogin, onShowSignup }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter();
@@ -61,28 +62,27 @@ function LoginPage({ onLogin }) {
     
 
 
-    return (
-        <main className={[classes.main, classes.background].join(' ')}> 
-
-        <div className={classes.container}>
-            <div className={classes.box}>
-                <h1>Login</h1>
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={handleUsernameChange} />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <br />
-                <button onClick={handleLogin} disabled={!username || !password} className={username || password ? '' : classes.disabled}>Login</button>
-                <br />
-                <Link href="/signup">
-                    <button>Sign Up</button>
-                </Link>
-            </div>
+        return (
+            <main className={[classes.main, classes.background].join(' ')}> 
+    
+            <div className={classes.container}>
+                <div className={classes.box}>
+                    <h1>Login</h1>
+                    <label>
+                        Username:
+                        <input type="text" value={username} onChange={handleUsernameChange} />
+                    </label>
+                    <br />
+                    <label>
+                        Password:
+                        <input type="password" value={password} onChange={handlePasswordChange} />
+                    </label>
+                    <br />
+                    <button onClick={handleLogin} disabled={!username || !password} className={username || password ? '' : classes.disabled}>Login</button>
+                    <br />
+                        <button onClick={onShowSignup}>Sign Up</button>
+                </div>
+                
         </div>
         </main>
     );
