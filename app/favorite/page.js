@@ -51,6 +51,7 @@ export default function Favorite() {
                 setMeals(data)
 
                 //after getting meal ids, get the meal from the mealdb api
+                if (data.length > 0) {
                 const mealIds = data.map((meal) => meal.recipeId)
                 console.log(mealIds)
                 mealIds.forEach((mealId) => {
@@ -62,7 +63,8 @@ export default function Favorite() {
                         })
 
 
-            })})
+            })}})
+        
         }, [username])
 
 
@@ -75,7 +77,7 @@ export default function Favorite() {
                 {favoriteMeals.length > 0 && favoriteMeals.map((meal, index) => (
                     <a href={`/meal/${meal.idMeal}`} key={`${meal.idMeal} ${index}`} className={styles.link}>
                         <div  className={styles.card}>
-                            <h2>{meal.strMeal}</h2>
+                            <h2 className={styles.header}>{meal.strMeal}</h2>
                             <img src={meal.strMealThumb} alt={meal.strMeal} height={100} width={100}/>
                         </div>
                     </a>

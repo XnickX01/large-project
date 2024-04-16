@@ -29,14 +29,36 @@ export default function CommunityPage() {
 
   const [searchText, setSearchText] = useState('');
 
+
+  const [filteredMeals, setFilteredMeals] = useState([]);
+
+  useEffect(() => {
+    fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then(response => response.json())
+      .then(data =>{ 
+        console.log(data.meals)
+        setMeals(data.meals)
+        setFilteredMeals(data.meals); // Initialize filtered meals with all meals
+      });
+  }, []);
+
   const handleSearch = (event) => {
-    setSearchText(event.target.value);
+    const searchText = event.target.value;
+    setSearchText(searchText);
+
+    const filtered = meals.filter((meal) => {
+      for (const column of columns) {
+        if (meal[column.field]?.toLowerCase().includes(searchText?.toLowerCase())) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    setFilteredMeals(filtered);
   };
 
-  const filteredMeals = meals.filter((meal) => {
-    return meal.strMeal.toLowerCase().includes(searchText.toLowerCase());
-  });
-
+ 
   return (
     <div className={classes.background}>
       <main className={classes.main}>

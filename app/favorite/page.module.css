@@ -25,17 +25,31 @@
 }
 
 .card{
-    width: 100%;
-    min-width: 70vh;
+    width: 30vh;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
-    background-color: #bbdc9c;
+    background-color: #7ba000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    min-height: 35vh;
+}
+
+.header{
+    
+    font-size: medium;  
+    color: #fff;
 }
 
 .link{
     text-decoration: none;
-    color: #333;
+    color: #fff;
+}
+
+.link:visited{
+    color: #fff;
+}
+.card:hover{
+    background-color: #5e7f00;
+    cursor: pointer;
 }

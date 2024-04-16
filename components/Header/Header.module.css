@@ -1,11 +1,13 @@
 .header {
     height: 70px;
     /* background-color: #FF4500; */
-    background-color: #2b5a00;
+    /* background-color: #2b5a00; */
     padding: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    animation: colorChange 20s infinite;
+
 }
 
 .headerLogo {
@@ -42,4 +44,10 @@
 }
 .link:visited{
     color: #ffffff;
+}
+
+@keyframes colorChange {
+    0% { background-color: #2b5a00; }
+    50% { background-color: #FF4500; }
+    100% { background-color: #2b5a00; }
 }
