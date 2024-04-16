@@ -84,7 +84,7 @@ export default function SignUp({onShowLogin}) {
 
   return (
     <div className={[styles.main, styles.background].join(' ')}>
-     {showConfirm ? <form className={styles.box} onSubmit={handleSubmit}>
+     {!showConfirm ? <form className={styles.box} onSubmit={handleSubmit}>
         <h1>
           Sign Up
         </h1>
