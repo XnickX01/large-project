@@ -25,7 +25,7 @@ function LoginPage({ onLogin, onShowSignup }) {
 
         const handleLogin = () => {
             // Perform login logic here
-            fetch('http://culinary-canvas-express.com:40/login', {
+            fetch('http://culinary-canvas-express.com:80/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

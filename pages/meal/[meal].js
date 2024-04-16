@@ -29,7 +29,7 @@ export default function MealPage() {
     //get user by token
     useEffect(() => {
         if(token){
-    fetch('http://culinary-canvas-express.com:40/user', {
+    fetch('http://culinary-canvas-express.com:80/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function MealPage() {
     useEffect(() => {
         async function fetchFollowStatus(){
             try{
-        fetch('http://culinary-canvas-express.com:40/is-favorite', {
+        fetch('http://culinary-canvas-express.com:80/is-favorite', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export default function MealPage() {
         setChecked(!checked)
         // if(checked === false){
         //     setChecked(true)
-        //     fetch('http://culinary-canvas-express.com:40/favorite-recipe', {
+        //     fetch('http://culinary-canvas-express.com:80/favorite-recipe', {
         //         method: 'POST',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ export default function MealPage() {
         // } else {
         //     console.log('unchecked')
         //     setChecked(false)
-        //     fetch('http://culinary-canvas-express.com:40/unfavorite', {
+        //     fetch('http://culinary-canvas-express.com:80/unfavorite', {
         //         method: 'DELETE',
         //         headers: {
         //             'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export default function MealPage() {
 
     useEffect((e)=>{
         if(checked){
-            fetch('http://culinary-canvas-express.com:40/favorite-recipe', {
+            fetch('http://culinary-canvas-express.com:80/favorite-recipe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export default function MealPage() {
             })
         }else{
             console.log('unchecked')
-            fetch('http://culinary-canvas-express.com:40/unfavorite', {
+            fetch('http://culinary-canvas-express.com:80/unfavorite', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

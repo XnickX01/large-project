@@ -36,7 +36,7 @@ export default function RootLayout ({ children }) {
       if(decodedToken && decodedToken.exp > dateNow.getTime()/1000){
         setIsLoggedIn(true)
         //get user by token
-        fetch('http://culinary-canvas-express.com:40/user', {
+        fetch('http://culinary-canvas-express.com:80/user', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ export default function Favorite() {
 
     //get user by token
     useEffect(() => {
-     fetch('http://culinary-canvas-express.com:40/user', {
+     fetch('http://culinary-canvas-express.com:80/user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function Favorite() {
 
     //get favorite meals by user using post to /favorite and passing username
     useEffect(() => {
-        fetch('http://culinary-canvas-express.com:40/favorites', {
+        fetch('http://culinary-canvas-express.com:80/favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

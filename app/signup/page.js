@@ -29,7 +29,7 @@ export default function SignUp({onShowLogin}) {
 
 
   const submitConfirm = async () => {
-    const response = await fetch('http://culinary-canvas-express.com:40/confirmation-number', {
+    const response = await fetch('http://culinary-canvas-express.com:80/confirmation-number', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function SignUp({onShowLogin}) {
     event.preventDefault();
 
     // Call your API here
-    const response = await fetch('http://culinary-canvas-express.com:40/signup', {
+    const response = await fetch('http://culinary-canvas-express.com:80/signup', {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
